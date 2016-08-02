@@ -1,0 +1,40 @@
+@import "/app.scss";
+
+.top-bar-left {
+    margin-top: 1.5rem;
+}
+
+.top-bar-right {
+    margin-top: 1.5rem;
+}
+
+.top-bar {
+  padding: 0rem 2rem 0rem 2rem;
+  background: $dark-grey;
+  height: 4rem;
+  box-shadow: 0.5px 0.5px 5px $light-grey;
+}
+
+.top-bar ul {
+  background: $dark-grey;
+}
+
+.top-bar.lower {
+  padding-top: 0px;
+}
+
+.top-bar-title {
+  margin-top: 1rem;
+  font-size: 1.7rem;
+  font-family: Bebas neue;
+}
+
+.menu>li>a {
+  color: #fafafa;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.is-dropdown-submenu {
+    border: 1px solid #373737;
+}

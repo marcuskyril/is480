@@ -1,0 +1,128 @@
+@import url('http://fonts.googleapis.com/css?family=Roboto:300,400');
+
+$space-large: 1.5rem;
+$title-color: #555;
+$nav-font: #333;
+$header-color: #6abedb; //blue
+$body-color: #1a1b1b;
+$dark-grey: #323232;
+$light-grey: #373837;
+$crazy-light-grey: #e6e7e8;
+
+body, html {
+  background: $body-color;
+  height: 100%;
+  font-family: roboto;
+  color: #fafafa;
+}
+
+.row {
+  max-width: 85rem;
+}
+
+div#offCanvas {
+    width: 250px;
+    height: 100%;
+    padding: 1.5rem;
+    background: $body-color;
+}
+
+.off-canvas-content {
+  background: $body-color;
+}
+
+a {
+  color: $header-color;
+}
+
+hr {
+  border-color: $light-grey;
+  margin-top: 0.5rem;
+}
+
+table thead {
+  background: $dark-grey;
+  color: white;
+}
+
+table tbody {
+  background: $crazy-light-grey;
+  color: $body-color;
+}
+
+.margin-top-large{
+  margin-top: 4rem;
+}
+
+.margin-bottom-large{
+  margin-bottom: 4rem;
+}
+
+.margin-top-md{
+  margin-top: 2rem;
+}
+
+.margin-bottom-md{
+  margin-bottom: 2rem;
+}
+
+.textAlignCenter {
+  text-align:center;
+}
+
+.callout {
+  background-color: $crazy-light-grey;
+}
+
+.callout-dark {
+  padding: 1.5rem;
+  background-color: $dark-grey;
+  border: 1px solid $light-grey;
+  border-radius: 4px;
+}
+
+.callout-auth {
+  background-color: #fafafa;
+  border: 1px solid #fafafa;
+  padding: 2rem;
+  text-align: center;
+
+  h3, p {
+    margin-bottom: 2rem;
+  }
+}
+
+.header {
+  color: $header-color;
+  margin-top: $space-large;
+  font-size: 1.5rem;
+  font-family: Bebas Neue;
+  text-transform: capitalize;
+}
+
+.page-title {
+  color: $title-color;
+  margin-top: $space-large;
+  margin-bottom: $space-large;
+  font-family: bebas neue;
+}
+
+input[type=search] {
+  box-shadow: none;
+}
+
+.top-bar-upper {
+  color: $nav-font;
+  font-size: 0.5rem;
+}
+
+.app-header {
+  font-size: 1.3rem;
+  font-family: Bebas Neue;
+}
+
+table.overview-custom {
+  thead, tbody, tr, th {
+    text-align: center;
+  }
+}
