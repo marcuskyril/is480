@@ -122,7 +122,7 @@ var Weather = React.createClass({
                 </div>
 
                 <div className = "column row">
-                  <h4 className="header">Tableaux</h4>
+                  <h4 className="header">All Sensors</h4>
                   <div className="callout callout-dark">
                     <Tableaux/>
                   </div>

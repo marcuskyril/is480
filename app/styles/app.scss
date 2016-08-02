@@ -1,4 +1,8 @@
 @import url('http://fonts.googleapis.com/css?family=Roboto:300,400');
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url('/styles/fonts/BebasNeue.otf');
+}
 
 $space-large: 1.5rem;
 $title-color: #555;
@@ -96,15 +100,14 @@ table tbody {
   color: $header-color;
   margin-top: $space-large;
   font-size: 1.5rem;
+  text-transform: uppercase;
   font-family: Bebas Neue;
-  text-transform: capitalize;
 }
 
 .page-title {
   color: $title-color;
   margin-top: $space-large;
   margin-bottom: $space-large;
-  font-family: bebas neue;
 }
 
 input[type=search] {
@@ -118,7 +121,6 @@ input[type=search] {
 
 .app-header {
   font-size: 1.3rem;
-  font-family: Bebas Neue;
 }
 
 table.overview-custom {
