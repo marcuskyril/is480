@@ -11,11 +11,14 @@ class LinkComponent extends React.Component{
     super(props);
   }
 
+  handleClick(data) {
+    console.log("click", data);
+
+  }
+
   render() {
-    console.log("data list in link comp", dataList);
-    console.log('data', this.props.data);
     return (
-        <a macAdd={this.props.data} data-toggle="offCanvas">{this.props.data}</a>
+        <a onClick={this.handleClick(this.props.data)} data-toggle="offCanvas">{this.props.data}</a>
     );
   }
 };
@@ -96,7 +99,7 @@ class GeneralMetrics extends React.Component{
     render() {
         return (
             <div>
-                <Griddle getExternalResults='true'
+                <Griddle
                   results={dataList}
                   initialSort="building_name"
                   tableClassName="piOverviewTable"

@@ -11,12 +11,9 @@ var Tableaux = require('Tableaux');
 var Notifications = require('Notifications');
 var AddSensor = require('AddSensor');
 var FontAwesome = require('react-fontawesome');
-var SlideMenu = require('react-burger-menu').slide;
-
 
 var Weather = React.createClass({
     getInitialState: function() {
-      console.log("Test", this.props.macAdd);
 
         return {
           isLoading: false
@@ -36,18 +33,18 @@ var Weather = React.createClass({
           errorMessage: undefined
         });
 
-        openWeatherMap.getTemp(location).then(function(temp) {
-            that.setState({
-              location: location,
-              temp: temp,
-              isLoading: false
-            });
-        }, function(e) {
-            that.setState({
-              isLoading: false,
-              errorMessage: e.message
-            });
-        });
+        // openWeatherMap.getTemp(location).then(function(temp) {
+        //     that.setState({
+        //       location: location,
+        //       temp: temp,
+        //       isLoading: false
+        //     });
+        // }, function(e) {
+        //     that.setState({
+        //       isLoading: false,
+        //       errorMessage: e.message
+        //     });
+        // });
     },
     render: function() {
         var {
@@ -105,9 +102,9 @@ var Weather = React.createClass({
                     <div>
                       <h4 className="header">Abnormal Behaviour</h4>
                       <div className="callout callout-dark">
-                        <WeatherForm onSearch={this.handleSearch}/>
-                        {renderMessage()}
-                        {renderError()}
+                      <WeatherForm onSearch={this.handleSearch}/>
+                      {renderMessage()}
+                      {renderError()}
                       </div>
                     </div>
 

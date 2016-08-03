@@ -53,13 +53,24 @@ export var startAddSensor = (inputMac, inputRegion, inputLocationLevel, inputLoc
     };
 };
 
+export var startResetPassword = (userEmailAddress) => {
+    console.log("start reset password");
+    var auth = firebase.auth();
+
+    auth.sendPasswordResetEmail(userEmailAddress).then(function() {
+        console.log('Reset password email sent', result);
+    }, function(error) {
+        console.log('Alamak', error);
+    });
+};
+
 export var startLogin = (inputEmail, inputPassword) => {
     console.log("start login");
     return (dispatch, getState) => {
         return firebase.auth().signInWithEmailAndPassword(inputEmail, inputPassword).then((result) => {
             console.log('Authentication worked!', result);
         }, (error) => {
-            console.log('Problem siol', error);
+            alert('Problem siol: ' +error);
         });
     };
 };

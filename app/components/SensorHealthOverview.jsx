@@ -3,6 +3,8 @@ import {websocketInit, websocketSend} from 'WebsocketHandler';
 var PieChart = require('react-d3-components').PieChart;
 var Griddle = require('griddle-react');
 
+var myColors = ["#006600", "#cc7a00", "#990000", "#1a1b1b"];
+
 var chartData = {
     label: 'somethingA',
     values: [
@@ -19,6 +21,9 @@ var chartData = {
             x: 'Down',
             y: 7
         }
+    ],
+    color: [
+      "#000,", "#333", "#f8f8f8", "#1a1b1b"
     ]
 };
 
@@ -76,7 +81,12 @@ var SensorHealthOverview = React.createClass({
         return (
             <div className="row">
               <div className="large-7 columns">
-                <PieChart data={chartData} width={400} height={250} tooltipHtml={tooltipPie} margin={{
+                <PieChart colorScale={d3.scale.ordinal().range(myColors)}
+                  data={chartData}
+                  width={400}
+                  height={250}
+                  tooltipHtml={tooltipPie}
+                  margin={{
                     top: 10,
                     bottom: 50,
                     left: 0,

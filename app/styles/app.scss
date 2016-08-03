@@ -1,8 +1,5 @@
 @import url('http://fonts.googleapis.com/css?family=Roboto:300,400');
-@font-face {
-    font-family: 'Bebas Neue';
-    src: url('/styles/fonts/BebasNeue.otf');
-}
+@import url('https://fonts.googleapis.com/css?family=Pathway+Gothic+One');
 
 $space-large: 1.5rem;
 $title-color: #555;
@@ -62,6 +59,14 @@ table tbody {
   margin-bottom: 4rem;
 }
 
+.margin-right-small {
+  margin-right: 2rem;
+}
+
+.margin-left-small {
+  margin-left: 2rem;
+}
+
 .margin-top-md{
   margin-top: 2rem;
 }
@@ -101,11 +106,14 @@ table tbody {
   margin-top: $space-large;
   font-size: 1.5rem;
   text-transform: uppercase;
-  font-family: Bebas Neue;
+  font-weight:bold;
+  font-family: 'Pathway Gothic One', sans-serif;
 }
 
 .page-title {
   color: $title-color;
+  font-family: 'Pathway Gothic One', sans-serif;
+  font-size: 1.5rem;
   margin-top: $space-large;
   margin-bottom: $space-large;
 }

@@ -11188,7 +11188,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.startCreateAccount = exports.startLogout = exports.startLogin = exports.startAddSensor = exports.logout = exports.login = exports.completeSensorDataFetch = exports.startSensorDataFetch = exports.fetchSensorData = undefined;
+	exports.startCreateAccount = exports.startLogout = exports.startLogin = exports.startResetPassword = exports.startAddSensor = exports.logout = exports.login = exports.completeSensorDataFetch = exports.startSensorDataFetch = exports.fetchSensorData = undefined;
 
 	var _firebase = __webpack_require__(10);
 
@@ -11249,13 +11249,24 @@
 	    };
 	};
 
+	var startResetPassword = exports.startResetPassword = function startResetPassword(userEmailAddress) {
+	    console.log("start reset password");
+	    var auth = _firebase2.default.auth();
+
+	    auth.sendPasswordResetEmail(userEmailAddress).then(function () {
+	        console.log('Reset password email sent', result);
+	    }, function (error) {
+	        console.log('Alamak', error);
+	    });
+	};
+
 	var startLogin = exports.startLogin = function startLogin(inputEmail, inputPassword) {
 	    console.log("start login");
 	    return function (dispatch, getState) {
 	        return _firebase2.default.auth().signInWithEmailAndPassword(inputEmail, inputPassword).then(function (result) {
 	            console.log('Authentication worked!', result);
 	        }, function (error) {
-	            console.log('Problem siol', error);
+	            alert('Problem siol: ' + error);
 	        });
 	    };
 	};
@@ -12632,62 +12643,75 @@
 	var Nav = __webpack_require__(149);
 
 	var Main = function (_React$Component) {
-	  _inherits(Main, _React$Component);
+	    _inherits(Main, _React$Component);
 
-	  function Main() {
-	    _classCallCheck(this, Main);
+	    function Main() {
+	        _classCallCheck(this, Main);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Main).apply(this, arguments));
-	  }
-
-	  _createClass(Main, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      $(document).foundation();
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Main).apply(this, arguments));
 	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      console.log("children in main", this.props);
-	      return React.createElement(
-	        'div',
-	        null,
-	        React.createElement(
-	          'div',
-	          { className: 'off-canvas-wrapper' },
-	          React.createElement(
-	            'div',
-	            { className: 'off-canvas-wrapper-inner', 'data-off-canvas-wrapper': true },
-	            React.createElement(
-	              'div',
-	              { className: 'off-canvas position-right', 'data-position': 'right', id: 'offCanvas', 'data-off-canvas': true },
-	              React.createElement(
-	                'button',
-	                { className: 'button hollow expanded' },
-	                'Pin to watch list.'
-	              )
-	            ),
-	            React.createElement(
-	              'div',
-	              { className: 'off-canvas-content', 'data-off-canvas-content': true },
-	              React.createElement(Nav, null),
-	              React.createElement(
+
+	    _createClass(Main, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            $(document).foundation();
+
+	            console.log("this.props.macAdd", this.props.children);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement(
 	                'div',
-	                { className: 'row' },
+	                null,
 	                React.createElement(
-	                  'div',
-	                  { className: 'columns medium-12 large 8' },
-	                  this.props.children
+	                    'div',
+	                    { className: 'off-canvas-wrapper' },
+	                    React.createElement(
+	                        'div',
+	                        { className: 'off-canvas-wrapper-inner', 'data-off-canvas-wrapper': true },
+	                        React.createElement(
+	                            'div',
+	                            { className: 'off-canvas position-right', 'data-position': 'right', id: 'offCanvas', 'data-off-canvas': true },
+	                            React.createElement(
+	                                'div',
+	                                { className: 'header textAlignCenter' },
+	                                'Test'
+	                            ),
+	                            React.createElement('hr', null),
+	                            React.createElement(
+	                                'div',
+	                                { className: 'header' },
+	                                'Top 5 Processes'
+	                            ),
+	                            React.createElement('hr', null),
+	                            React.createElement(
+	                                'button',
+	                                { className: 'button hollow expanded' },
+	                                'Pin to watch list'
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'div',
+	                            { className: 'off-canvas-content', 'data-off-canvas-content': true },
+	                            React.createElement(Nav, null),
+	                            React.createElement(
+	                                'div',
+	                                { className: 'row' },
+	                                React.createElement(
+	                                    'div',
+	                                    { className: 'columns medium-12 large 8' },
+	                                    this.props.children
+	                                )
+	                            )
+	                        )
+	                    )
 	                )
-	              )
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
+	            );
+	        }
+	    }]);
 
-	  return Main;
+	    return Main;
 	}(React.Component);
 
 	;
@@ -12773,9 +12797,9 @@
 	                        _react2.default.createElement(
 	                            Link,
 	                            { to: '/about', activeClassName: 'active', activeStyle: {
-	                                    color: '#222`'
+	                                    color: '#222'
 	                                } },
-	                            'Historical Data'
+	                            _react2.default.createElement(FontAwesome, { name: 'bar-chart' })
 	                        ),
 	                        _react2.default.createElement(
 	                            'ul',
@@ -12844,7 +12868,7 @@
 	                            { to: '/examples', activeClassName: 'active', activeStyle: {
 	                                    color: 'blue'
 	                                } },
-	                            'Welcome, Ian'
+	                            _react2.default.createElement(FontAwesome, { name: 'cog' })
 	                        ),
 	                        _react2.default.createElement(
 	                            'ul',
@@ -13028,13 +13052,11 @@
 	var Notifications = __webpack_require__(520);
 	var AddSensor = __webpack_require__(521);
 	var FontAwesome = __webpack_require__(150);
-	var SlideMenu = __webpack_require__(540).slide;
 
 	var Weather = React.createClass({
 	  displayName: 'Weather',
 
 	  getInitialState: function getInitialState() {
-	    console.log("Test", this.props.macAdd);
 
 	    return {
 	      isLoading: false
@@ -13054,18 +13076,18 @@
 	      errorMessage: undefined
 	    });
 
-	    openWeatherMap.getTemp(location).then(function (temp) {
-	      that.setState({
-	        location: location,
-	        temp: temp,
-	        isLoading: false
-	      });
-	    }, function (e) {
-	      that.setState({
-	        isLoading: false,
-	        errorMessage: e.message
-	      });
-	    });
+	    // openWeatherMap.getTemp(location).then(function(temp) {
+	    //     that.setState({
+	    //       location: location,
+	    //       temp: temp,
+	    //       isLoading: false
+	    //     });
+	    // }, function(e) {
+	    //     that.setState({
+	    //       isLoading: false,
+	    //       errorMessage: e.message
+	    //     });
+	    // });
 	  },
 	  render: function render() {
 	    var _state = this.state;
@@ -13222,77 +13244,96 @@
 	            React.createElement(
 	                "form",
 	                { onSubmit: this.onFormSubmit },
-	                React.createElement("input", { type: "text", ref: "location" }),
 	                React.createElement(
-	                    "label",
-	                    null,
-	                    "Display Period",
+	                    "div",
+	                    { className: "row" },
 	                    React.createElement(
-	                        "select",
-	                        null,
+	                        "div",
+	                        { className: "large-6 columns" },
 	                        React.createElement(
-	                            "option",
-	                            { value: "" },
-	                            "Display Period"
-	                        ),
+	                            "label",
+	                            null,
+	                            "Display Period",
+	                            React.createElement(
+	                                "select",
+	                                null,
+	                                React.createElement(
+	                                    "option",
+	                                    { value: "" },
+	                                    "Display Period"
+	                                ),
+	                                React.createElement(
+	                                    "option",
+	                                    { value: "husker" },
+	                                    "#"
+	                                ),
+	                                React.createElement(
+	                                    "option",
+	                                    { value: "starbuck" },
+	                                    "#"
+	                                ),
+	                                React.createElement(
+	                                    "option",
+	                                    { value: "hotdog" },
+	                                    "#"
+	                                ),
+	                                React.createElement(
+	                                    "option",
+	                                    { value: "apollo" },
+	                                    "#"
+	                                )
+	                            )
+	                        )
+	                    ),
+	                    React.createElement(
+	                        "div",
+	                        { className: "large-6 columns" },
 	                        React.createElement(
-	                            "option",
-	                            { value: "husker" },
-	                            "Husker"
-	                        ),
-	                        React.createElement(
-	                            "option",
-	                            { value: "starbuck" },
-	                            "Starbuck"
-	                        ),
-	                        React.createElement(
-	                            "option",
-	                            { value: "hotdog" },
-	                            "Hot Dog"
-	                        ),
-	                        React.createElement(
-	                            "option",
-	                            { value: "apollo" },
-	                            "Apollo"
+	                            "label",
+	                            null,
+	                            "Interval",
+	                            React.createElement(
+	                                "select",
+	                                null,
+	                                React.createElement(
+	                                    "option",
+	                                    { value: "" },
+	                                    "Interval"
+	                                ),
+	                                React.createElement(
+	                                    "option",
+	                                    { value: "husker" },
+	                                    "#"
+	                                ),
+	                                React.createElement(
+	                                    "option",
+	                                    { value: "starbuck" },
+	                                    "#"
+	                                ),
+	                                React.createElement(
+	                                    "option",
+	                                    { value: "hotdog" },
+	                                    "#"
+	                                ),
+	                                React.createElement(
+	                                    "option",
+	                                    { value: "apollo" },
+	                                    "#"
+	                                )
+	                            )
 	                        )
 	                    )
 	                ),
 	                React.createElement(
-	                    "label",
-	                    null,
-	                    "Interval",
+	                    "div",
+	                    { className: "row" },
 	                    React.createElement(
-	                        "select",
-	                        null,
-	                        React.createElement(
-	                            "option",
-	                            { value: "" },
-	                            "Interval"
-	                        ),
-	                        React.createElement(
-	                            "option",
-	                            { value: "husker" },
-	                            "Husker"
-	                        ),
-	                        React.createElement(
-	                            "option",
-	                            { value: "starbuck" },
-	                            "Starbuck"
-	                        ),
-	                        React.createElement(
-	                            "option",
-	                            { value: "hotdog" },
-	                            "Hot Dog"
-	                        ),
-	                        React.createElement(
-	                            "option",
-	                            { value: "apollo" },
-	                            "Apollo"
-	                        )
+	                        "div",
+	                        { className: "large-3 columns" },
+	                        React.createElement("input", { type: "reset", className: "button hollow", value: "Reset" }),
+	                        React.createElement("input", { type: "submit", className: "button hollow margin-left-small", value: "Bite me" })
 	                    )
-	                ),
-	                React.createElement("input", { type: "reset", className: "button hollow", value: "Reset" }),
-	                React.createElement("input", { type: "submit", className: "button hollow", value: "Bite me" })
+	                )
 	            )
 	        );
 	    }
@@ -13466,6 +13507,8 @@
 	var PieChart = __webpack_require__(158).PieChart;
 	var Griddle = __webpack_require__(315);
 
+	var myColors = ["#006600", "#cc7a00", "#990000", "#1a1b1b"];
+
 	var chartData = {
 	    label: 'somethingA',
 	    values: [{
@@ -13480,7 +13523,8 @@
 	    }, {
 	        x: 'Down',
 	        y: 7
-	    }]
+	    }],
+	    color: ["#000,", "#333", "#f8f8f8", "#1a1b1b"]
 	};
 
 	var tableData = [];
@@ -13542,7 +13586,12 @@
 	            React.createElement(
 	                'div',
 	                { className: 'large-7 columns' },
-	                React.createElement(PieChart, { data: chartData, width: 400, height: 250, tooltipHtml: tooltipPie, margin: {
+	                React.createElement(PieChart, { colorScale: d3.scale.ordinal().range(myColors),
+	                    data: chartData,
+	                    width: 400,
+	                    height: 250,
+	                    tooltipHtml: tooltipPie,
+	                    margin: {
 	                        top: 10,
 	                        bottom: 50,
 	                        left: 0,
@@ -50959,13 +51008,16 @@
 	  }
 
 	  _createClass(LinkComponent, [{
+	    key: 'handleClick',
+	    value: function handleClick(data) {
+	      console.log("click", data);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      console.log("data list in link comp", dataList);
-	      console.log('data', this.props.data);
 	      return React.createElement(
 	        'a',
-	        { macAdd: this.props.data, 'data-toggle': 'offCanvas' },
+	        { onClick: this.handleClick(this.props.data), 'data-toggle': 'offCanvas' },
 	        this.props.data
 	      );
 	    }
@@ -51070,7 +51122,7 @@
 	      return React.createElement(
 	        'div',
 	        null,
-	        React.createElement(Griddle, { getExternalResults: 'true',
+	        React.createElement(Griddle, {
 	          results: dataList,
 	          initialSort: 'building_name',
 	          tableClassName: 'piOverviewTable',
@@ -52038,185 +52090,245 @@
 /* 524 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+
+	var _reactRedux = __webpack_require__(104);
+
+	var Redux = _interopRequireWildcard(_reactRedux);
+
+	var _actions = __webpack_require__(127);
+
+	var actions = _interopRequireWildcard(_actions);
+
+	var _firebase = __webpack_require__(10);
+
+	var _firebase2 = _interopRequireDefault(_firebase);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	var React = __webpack_require__(14);
 
+
+	var user = null;
+
 	var AccountSettings = React.createClass({
-	    displayName: "AccountSettings",
+	    displayName: 'AccountSettings',
+	    onUpdateDisplayName: function onUpdateDisplayName(e) {
+
+	        e.preventDefault();
+
+	        var displayName = this.refs.displayName.value;
+	        var dispatch = this.props.dispatch;
+
+
+	        console.log("start login", displayName);
+
+	        user = _firebase2.default.auth().currentUser;
+
+	        if (user != null) {
+	            user.updateProfile({
+	                displayName: displayName
+	            }).then(function () {
+	                alert('New display name: ' + user.displayName);
+	            }, function (error) {
+	                alert('Alamak ' + error);
+	            });
+	        }
+	    },
+	    onUpdateEmail: function onUpdateEmail(e) {
+
+	        e.preventDefault();
+
+	        var newEmail = this.refs.newEmail.value;
+	        var dispatch = this.props.dispatch;
+
+
+	        console.log("start update email", newEmail);
+
+	        user = _firebase2.default.auth().currentUser;
+
+	        if (user != null) {
+	            user.updateEmail(inputEmail).then(function () {
+	                alert('Email updated!');
+	            }, function (error) {
+	                alert('Alamak ' + error);
+	            });
+	        }
+	    },
+	    onUpdatePassword: function onUpdatePassword(e) {
+	        e.preventDefault();
+
+	        var newPassword = this.refs.newPassword.value;
+	        var confirmPassword = this.refs.confirmPassword.value;
+
+	        console.log("start update password");
+
+	        user = _firebase2.default.auth().currentUser;
+
+	        if (user != null && user) {
+	            user.updatePassword(confirmPassword).then(function () {
+	                alert('Password changed!');
+	            }, function (error) {
+	                alert('Alamak! ' + error);
+	            });
+	        }
+	    },
+
 
 	    render: function render() {
 	        return React.createElement(
-	            "div",
-	            { className: "large-5 large-centered columns", id: "updateForm" },
+	            'div',
+	            { className: 'large-5 large-centered columns', id: 'updateForm' },
 	            React.createElement(
-	                "div",
-	                { className: "row" },
+	                'div',
+	                { className: 'row' },
 	                React.createElement(
-	                    "h3",
-	                    { className: "header textAlignCenter" },
-	                    "Update Profile"
+	                    'h3',
+	                    { className: 'header textAlignCenter' },
+	                    'Update Profile'
 	                )
 	            ),
 	            React.createElement(
-	                "div",
-	                { className: "row" },
+	                'div',
+	                { className: 'row' },
 	                React.createElement(
-	                    "div",
-	                    { className: "row" },
-	                    React.createElement("br", null),
+	                    'div',
+	                    { className: 'row' },
+	                    React.createElement('br', null),
 	                    React.createElement(
-	                        "h3",
-	                        { className: "header" },
-	                        "Personal Particulars"
+	                        'h3',
+	                        { className: 'header' },
+	                        'Personal Particulars'
 	                    ),
-	                    React.createElement("hr", null)
+	                    React.createElement('hr', null)
 	                ),
 	                React.createElement(
-	                    "div",
-	                    { className: "row" },
+	                    'form',
+	                    null,
 	                    React.createElement(
-	                        "div",
-	                        { className: "small-4 large-4 columns" },
-	                        "First name:"
-	                    ),
-	                    React.createElement(
-	                        "div",
-	                        { className: "large-8 small-8 columns" },
-	                        React.createElement("input", { type: "text", name: "newfullname" })
-	                    )
-	                ),
-	                React.createElement(
-	                    "div",
-	                    { className: "row" },
-	                    React.createElement("div", { className: "large-4 small-4 columns" }),
-	                    React.createElement(
-	                        "div",
-	                        { className: "large-8 small-8 columns" },
+	                        'div',
+	                        { className: 'row' },
 	                        React.createElement(
-	                            "button",
-	                            { className: "expanded button" },
-	                            "Update"
+	                            'div',
+	                            { className: 'small-4 large-4 columns' },
+	                            'Display name:'
+	                        ),
+	                        React.createElement(
+	                            'div',
+	                            { className: 'large-8 small-8 columns' },
+	                            React.createElement('input', { type: 'text', ref: 'displayName', name: 'displayName' })
+	                        )
+	                    ),
+	                    React.createElement(
+	                        'div',
+	                        { className: 'row' },
+	                        React.createElement('div', { className: 'large-4 small-4 columns' }),
+	                        React.createElement(
+	                            'div',
+	                            { className: 'large-8 small-8 columns' },
+	                            React.createElement(
+	                                'button',
+	                                { className: 'expanded button', onClick: this.onUpdateDisplayName },
+	                                'Update'
+	                            )
 	                        )
 	                    )
 	                ),
 	                React.createElement(
-	                    "div",
-	                    { className: "row" },
-	                    React.createElement("br", null),
+	                    'div',
+	                    { className: 'row' },
+	                    React.createElement('br', null),
 	                    React.createElement(
-	                        "h3",
-	                        { className: "header" },
-	                        "Email"
+	                        'h3',
+	                        { className: 'header' },
+	                        'Email'
 	                    ),
-	                    React.createElement("hr", null)
+	                    React.createElement('hr', null)
 	                ),
 	                React.createElement(
-	                    "div",
-	                    { className: "row" },
+	                    'div',
+	                    { className: 'row' },
 	                    React.createElement(
-	                        "div",
-	                        { className: "small-4 large-4 columns" },
-	                        "Old Email:"
+	                        'div',
+	                        { className: 'small-4 large-4 columns' },
+	                        'New Email:'
 	                    ),
 	                    React.createElement(
-	                        "div",
-	                        { className: "large-8 small-8 columns" },
-	                        React.createElement("input", { type: "text", name: "oldemail" })
+	                        'div',
+	                        { className: 'large-8 small-8 columns' },
+	                        React.createElement('input', { type: 'text', ref: 'newEmail', name: 'newemail' })
 	                    )
 	                ),
 	                React.createElement(
-	                    "div",
-	                    { className: "row" },
+	                    'div',
+	                    { className: 'row' },
+	                    React.createElement('div', { className: 'large-4 small-4 columns' }),
 	                    React.createElement(
-	                        "div",
-	                        { className: "small-4 large-4 columns" },
-	                        "New Email:"
-	                    ),
-	                    React.createElement(
-	                        "div",
-	                        { className: "large-8 small-8 columns" },
-	                        React.createElement("input", { type: "text", name: "newemail" })
-	                    )
-	                ),
-	                React.createElement(
-	                    "div",
-	                    { className: "row" },
-	                    React.createElement("div", { className: "large-4 small-4 columns" }),
-	                    React.createElement(
-	                        "div",
-	                        { className: "large-8 small-8 columns" },
+	                        'div',
+	                        { className: 'large-8 small-8 columns' },
 	                        React.createElement(
-	                            "button",
-	                            { className: "expanded button" },
-	                            "Update"
+	                            'button',
+	                            { className: 'expanded button', onClick: this.onUpdateEmail },
+	                            'Update'
 	                        )
 	                    )
 	                ),
 	                React.createElement(
-	                    "div",
-	                    { className: "row" },
-	                    React.createElement("br", null),
+	                    'div',
+	                    { className: 'row' },
+	                    React.createElement('br', null),
 	                    React.createElement(
-	                        "h3",
-	                        { className: "header" },
-	                        "Password"
+	                        'h3',
+	                        { className: 'header' },
+	                        'Password'
 	                    ),
-	                    React.createElement("hr", null)
+	                    React.createElement('hr', null)
 	                ),
 	                React.createElement(
-	                    "div",
-	                    { className: "row" },
+	                    'form',
+	                    null,
 	                    React.createElement(
-	                        "div",
-	                        { className: "small-4 large-4 columns" },
-	                        "Old Password:"
-	                    ),
-	                    React.createElement(
-	                        "div",
-	                        { className: "large-8 small-8 columns" },
-	                        React.createElement("input", { type: "password", name: "oldpassword" })
-	                    )
-	                ),
-	                React.createElement(
-	                    "div",
-	                    { className: "row" },
-	                    React.createElement(
-	                        "div",
-	                        { className: "small-4 large-4 columns" },
-	                        "New Password:"
-	                    ),
-	                    React.createElement(
-	                        "div",
-	                        { className: "large-8 small-8 columns" },
-	                        React.createElement("input", { type: "text", name: "newpassword1" })
-	                    )
-	                ),
-	                React.createElement(
-	                    "div",
-	                    { className: "row" },
-	                    React.createElement(
-	                        "div",
-	                        { className: "small-4 large-4 columns" },
-	                        "Confirm Password:"
-	                    ),
-	                    React.createElement(
-	                        "div",
-	                        { className: "large-8 small-8 columns" },
-	                        React.createElement("input", { type: "password", name: "newpassword2" })
-	                    )
-	                ),
-	                React.createElement(
-	                    "div",
-	                    { className: "row" },
-	                    React.createElement("div", { className: "large-4 small-4 columns" }),
-	                    React.createElement(
-	                        "div",
-	                        { className: "large-8 small-8 columns" },
+	                        'div',
+	                        { className: 'row' },
 	                        React.createElement(
-	                            "button",
-	                            { className: "expanded button" },
-	                            "Update"
+	                            'div',
+	                            { className: 'small-4 large-4 columns' },
+	                            'New Password:'
+	                        ),
+	                        React.createElement(
+	                            'div',
+	                            { className: 'large-8 small-8 columns' },
+	                            React.createElement('input', { type: 'password', ref: 'newPassword', name: 'newpassword1' })
+	                        )
+	                    ),
+	                    React.createElement(
+	                        'div',
+	                        { className: 'row' },
+	                        React.createElement(
+	                            'div',
+	                            { className: 'small-4 large-4 columns' },
+	                            'Confirm Password:'
+	                        ),
+	                        React.createElement(
+	                            'div',
+	                            { className: 'large-8 small-8 columns' },
+	                            React.createElement('input', { type: 'password', ref: 'confirmPassword', name: 'newpassword2' })
+	                        )
+	                    ),
+	                    React.createElement(
+	                        'div',
+	                        { className: 'row' },
+	                        React.createElement('div', { className: 'large-4 small-4 columns' }),
+	                        React.createElement(
+	                            'div',
+	                            { className: 'large-8 small-8 columns' },
+	                            React.createElement(
+	                                'button',
+	                                { className: 'expanded button', onClick: this.onUpdatePassword },
+	                                'Update'
+	                            )
 	                        )
 	                    )
 	                )
@@ -52226,6 +52338,7 @@
 	});
 
 	module.exports = AccountSettings;
+	// export default Redux.connect()(AccountSettings);
 
 /***/ },
 /* 525 */
@@ -52766,9 +52879,10 @@
 	exports = module.exports = __webpack_require__(530)();
 	// imports
 	exports.push([module.id, "@import url(http://fonts.googleapis.com/css?family=Roboto:300,400);", ""]);
+	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Pathway+Gothic+One);", ""]);
 
 	// module
-	exports.push([module.id, "@font-face {\n  font-family: 'Bebas Neue';\n  src: url(\"/styles/fonts/BebasNeue.otf\"); }\n\nbody, html {\n  background: #1a1b1b;\n  height: 100%;\n  font-family: roboto;\n  color: #fafafa; }\n\n.row {\n  max-width: 85rem; }\n\ndiv#offCanvas {\n  width: 250px;\n  height: 100%;\n  padding: 1.5rem;\n  background: #1a1b1b; }\n\n.off-canvas-content {\n  background: #1a1b1b; }\n\na {\n  color: #6abedb; }\n\nhr {\n  border-color: #373837;\n  margin-top: 0.5rem; }\n\ntable thead {\n  background: #323232;\n  color: white; }\n\ntable tbody {\n  background: #e6e7e8;\n  color: #1a1b1b; }\n\n.margin-top-large {\n  margin-top: 4rem; }\n\n.margin-bottom-large {\n  margin-bottom: 4rem; }\n\n.margin-top-md {\n  margin-top: 2rem; }\n\n.margin-bottom-md {\n  margin-bottom: 2rem; }\n\n.textAlignCenter {\n  text-align: center; }\n\n.callout {\n  background-color: #e6e7e8; }\n\n.callout-dark {\n  padding: 1.5rem;\n  background-color: #323232;\n  border: 1px solid #373837;\n  border-radius: 4px; }\n\n.callout-auth {\n  background-color: #fafafa;\n  border: 1px solid #fafafa;\n  padding: 2rem;\n  text-align: center; }\n  .callout-auth h3, .callout-auth p {\n    margin-bottom: 2rem; }\n\n.header {\n  color: #6abedb;\n  margin-top: 1.5rem;\n  font-size: 1.5rem;\n  text-transform: uppercase;\n  font-family: Bebas Neue; }\n\n.page-title {\n  color: #555;\n  margin-top: 1.5rem;\n  margin-bottom: 1.5rem; }\n\ninput[type=search] {\n  box-shadow: none; }\n\n.top-bar-upper {\n  color: #333;\n  font-size: 0.5rem; }\n\n.app-header {\n  font-size: 1.3rem; }\n\ntable.overview-custom thead, table.overview-custom tbody, table.overview-custom tr, table.overview-custom th {\n  text-align: center; }\n", ""]);
+	exports.push([module.id, "body, html {\n  background: #1a1b1b;\n  height: 100%;\n  font-family: roboto;\n  color: #fafafa; }\n\n.row {\n  max-width: 85rem; }\n\ndiv#offCanvas {\n  width: 250px;\n  height: 100%;\n  padding: 1.5rem;\n  background: #1a1b1b; }\n\n.off-canvas-content {\n  background: #1a1b1b; }\n\na {\n  color: #6abedb; }\n\nhr {\n  border-color: #373837;\n  margin-top: 0.5rem; }\n\ntable thead {\n  background: #323232;\n  color: white; }\n\ntable tbody {\n  background: #e6e7e8;\n  color: #1a1b1b; }\n\n.margin-top-large {\n  margin-top: 4rem; }\n\n.margin-bottom-large {\n  margin-bottom: 4rem; }\n\n.margin-right-small {\n  margin-right: 2rem; }\n\n.margin-left-small {\n  margin-left: 2rem; }\n\n.margin-top-md {\n  margin-top: 2rem; }\n\n.margin-bottom-md {\n  margin-bottom: 2rem; }\n\n.textAlignCenter {\n  text-align: center; }\n\n.callout {\n  background-color: #e6e7e8; }\n\n.callout-dark {\n  padding: 1.5rem;\n  background-color: #323232;\n  border: 1px solid #373837;\n  border-radius: 4px; }\n\n.callout-auth {\n  background-color: #fafafa;\n  border: 1px solid #fafafa;\n  padding: 2rem;\n  text-align: center; }\n  .callout-auth h3, .callout-auth p {\n    margin-bottom: 2rem; }\n\n.header {\n  color: #6abedb;\n  margin-top: 1.5rem;\n  font-size: 1.5rem;\n  text-transform: uppercase;\n  font-weight: bold;\n  font-family: 'Pathway Gothic One', sans-serif; }\n\n.page-title {\n  color: #555;\n  font-family: 'Pathway Gothic One', sans-serif;\n  font-size: 1.5rem;\n  margin-top: 1.5rem;\n  margin-bottom: 1.5rem; }\n\ninput[type=search] {\n  box-shadow: none; }\n\n.top-bar-upper {\n  color: #333;\n  font-size: 0.5rem; }\n\n.app-header {\n  font-size: 1.3rem; }\n\ntable.overview-custom thead, table.overview-custom tbody, table.overview-custom tr, table.overview-custom th {\n  text-align: center; }\n", ""]);
 
 	// exports
 
@@ -52806,9 +52920,10 @@
 	exports = module.exports = __webpack_require__(530)();
 	// imports
 	exports.push([module.id, "@import url(http://fonts.googleapis.com/css?family=Roboto:300,400);", ""]);
+	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Pathway+Gothic+One);", ""]);
 
 	// module
-	exports.push([module.id, "@font-face {\n  font-family: 'Bebas Neue';\n  src: url(\"/styles/fonts/BebasNeue.otf\"); }\n\nbody, html {\n  background: #1a1b1b;\n  height: 100%;\n  font-family: roboto;\n  color: #fafafa; }\n\n.row {\n  max-width: 85rem; }\n\ndiv#offCanvas {\n  width: 250px;\n  height: 100%;\n  padding: 1.5rem;\n  background: #1a1b1b; }\n\n.off-canvas-content {\n  background: #1a1b1b; }\n\na {\n  color: #6abedb; }\n\nhr {\n  border-color: #373837;\n  margin-top: 0.5rem; }\n\ntable thead {\n  background: #323232;\n  color: white; }\n\ntable tbody {\n  background: #e6e7e8;\n  color: #1a1b1b; }\n\n.margin-top-large {\n  margin-top: 4rem; }\n\n.margin-bottom-large {\n  margin-bottom: 4rem; }\n\n.margin-top-md {\n  margin-top: 2rem; }\n\n.margin-bottom-md {\n  margin-bottom: 2rem; }\n\n.textAlignCenter {\n  text-align: center; }\n\n.callout {\n  background-color: #e6e7e8; }\n\n.callout-dark {\n  padding: 1.5rem;\n  background-color: #323232;\n  border: 1px solid #373837;\n  border-radius: 4px; }\n\n.callout-auth {\n  background-color: #fafafa;\n  border: 1px solid #fafafa;\n  padding: 2rem;\n  text-align: center; }\n  .callout-auth h3, .callout-auth p {\n    margin-bottom: 2rem; }\n\n.header {\n  color: #6abedb;\n  margin-top: 1.5rem;\n  font-size: 1.5rem;\n  text-transform: uppercase;\n  font-family: Bebas Neue; }\n\n.page-title {\n  color: #555;\n  margin-top: 1.5rem;\n  margin-bottom: 1.5rem; }\n\ninput[type=search] {\n  box-shadow: none; }\n\n.top-bar-upper {\n  color: #333;\n  font-size: 0.5rem; }\n\n.app-header {\n  font-size: 1.3rem; }\n\ntable.overview-custom thead, table.overview-custom tbody, table.overview-custom tr, table.overview-custom th {\n  text-align: center; }\n\n.top-bar-left {\n  margin-top: 1.5rem; }\n\n.top-bar-right {\n  margin-top: 1.5rem; }\n\n.top-bar {\n  padding: 0rem 2rem 0rem 2rem;\n  background: #323232;\n  height: 4rem;\n  box-shadow: 0.5px 0.5px 5px #373837; }\n\n.top-bar ul {\n  background: #323232; }\n\n.top-bar.lower {\n  padding-top: 0px; }\n\n.top-bar-title {\n  margin-top: 1rem;\n  font-size: 1.7rem;\n  text-transform: uppercase;\n  font-family: Bebas Neue; }\n\n.menu > li > a {\n  color: #fafafa;\n  font-weight: bold;\n  text-transform: uppercase; }\n\n.is-dropdown-submenu {\n  border: 1px solid #373737; }\n", ""]);
+	exports.push([module.id, "body, html {\n  background: #1a1b1b;\n  height: 100%;\n  font-family: roboto;\n  color: #fafafa; }\n\n.row {\n  max-width: 85rem; }\n\ndiv#offCanvas {\n  width: 250px;\n  height: 100%;\n  padding: 1.5rem;\n  background: #1a1b1b; }\n\n.off-canvas-content {\n  background: #1a1b1b; }\n\na {\n  color: #6abedb; }\n\nhr {\n  border-color: #373837;\n  margin-top: 0.5rem; }\n\ntable thead {\n  background: #323232;\n  color: white; }\n\ntable tbody {\n  background: #e6e7e8;\n  color: #1a1b1b; }\n\n.margin-top-large {\n  margin-top: 4rem; }\n\n.margin-bottom-large {\n  margin-bottom: 4rem; }\n\n.margin-right-small {\n  margin-right: 2rem; }\n\n.margin-left-small {\n  margin-left: 2rem; }\n\n.margin-top-md {\n  margin-top: 2rem; }\n\n.margin-bottom-md {\n  margin-bottom: 2rem; }\n\n.textAlignCenter {\n  text-align: center; }\n\n.callout {\n  background-color: #e6e7e8; }\n\n.callout-dark {\n  padding: 1.5rem;\n  background-color: #323232;\n  border: 1px solid #373837;\n  border-radius: 4px; }\n\n.callout-auth {\n  background-color: #fafafa;\n  border: 1px solid #fafafa;\n  padding: 2rem;\n  text-align: center; }\n  .callout-auth h3, .callout-auth p {\n    margin-bottom: 2rem; }\n\n.header {\n  color: #6abedb;\n  margin-top: 1.5rem;\n  font-size: 1.5rem;\n  text-transform: uppercase;\n  font-weight: bold;\n  font-family: 'Pathway Gothic One', sans-serif; }\n\n.page-title {\n  color: #555;\n  font-family: 'Pathway Gothic One', sans-serif;\n  font-size: 1.5rem;\n  margin-top: 1.5rem;\n  margin-bottom: 1.5rem; }\n\ninput[type=search] {\n  box-shadow: none; }\n\n.top-bar-upper {\n  color: #333;\n  font-size: 0.5rem; }\n\n.app-header {\n  font-size: 1.3rem; }\n\ntable.overview-custom thead, table.overview-custom tbody, table.overview-custom tr, table.overview-custom th {\n  text-align: center; }\n\n.top-bar-left {\n  margin-top: 1.5rem; }\n\n.top-bar-right {\n  margin-top: 1.5rem; }\n\n.top-bar {\n  padding: 0rem 2rem 0rem 2rem;\n  background: #323232;\n  height: 4rem;\n  box-shadow: 0.5px 0.5px 5px #373837; }\n\n.top-bar ul {\n  background: #323232; }\n\n.top-bar.lower {\n  padding-top: 0px; }\n\n.top-bar-title {\n  margin-top: 1rem;\n  font-size: 1.7rem;\n  text-transform: uppercase;\n  font-weight: bold;\n  font-family: 'Pathway Gothic One', sans-serif; }\n\n.menu > li > a {\n  color: #fafafa;\n  font-weight: bold;\n  font-size: 1rem;\n  text-transform: uppercase; }\n\n.is-dropdown-submenu {\n  border: 1px solid #373737; }\n", ""]);
 
 	// exports
 
@@ -57664,7 +57779,7 @@
 /* 610 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_LOCAL_MODULE_0__;// Snap.svg 0.4.0
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_LOCAL_MODULE_0__;var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Snap.svg 0.4.0
 	// 
 	// Copyright (c) 2013 – 2015 Adobe Systems Incorporated. All rights reserved.
 	// 

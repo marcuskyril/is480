@@ -33,8 +33,8 @@ var Nav = React.createClass({
 
                         <li>
                             <Link to="/about" activeClassName="active" activeStyle={{
-                                color: '#222`'
-                            }}>Historical Data</Link>
+                                color: '#222'
+                            }}><FontAwesome name='bar-chart'/></Link>
                             <ul className="menu vertical">
                                 <li>
                                     <a href="#">Uptime</a>
@@ -59,7 +59,7 @@ var Nav = React.createClass({
                         <li>
                             <Link to="/examples" activeClassName="active" activeStyle={{
                                 color: 'blue'
-                            }}>Welcome, Ian</Link>
+                            }}><FontAwesome name='cog'/></Link>
                             <ul className="menu vertical">
 
                                 <li><Link to="/accountSettings" activeClassName="active" activeStyle={{
