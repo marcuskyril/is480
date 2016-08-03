@@ -1,6 +1,7 @@
 var React = require('react');
 var Griddle = require('griddle-react');
 var axios = require('axios');
+var FontAwesome = require('react-fontawesome');
 
 const tableMetaData =  [
   {
@@ -151,9 +152,7 @@ class Tableaux extends React.Component {
     var url = baseUrl + 30;
     axios.get(url).then(function(res) {
 
-        // dataList = [res.data['sensor1']];
         var temp = res.data;
-        // dataList = res.data;
 
         for(var k in temp) {
           //  console.log(k, temp[k]);
@@ -177,6 +176,7 @@ class Tableaux extends React.Component {
 
     return (
       <Griddle results={dataList}
+        settingsIconComponent={<FontAwesome name='cog'inverse={true} className="margin-left-small"/>}
         columnMetadata={tableMetaData}
         tableClassName="table"
         showFilter={true}

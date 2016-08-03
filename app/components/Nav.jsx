@@ -32,7 +32,7 @@ var Nav = React.createClass({
                         </li>
 
                         <li>
-                            <Link to="/about" activeClassName="active" activeStyle={{
+                            <Link to="/" activeClassName="active" activeStyle={{
                                 color: '#222'
                             }}><FontAwesome name='bar-chart'/></Link>
                             <ul className="menu vertical">
@@ -57,7 +57,7 @@ var Nav = React.createClass({
                             </ul>
                         </li>
                         <li>
-                            <Link to="/examples" activeClassName="active" activeStyle={{
+                            <Link to="/" activeClassName="active" activeStyle={{
                                 color: 'blue'
                             }}><FontAwesome name='cog'/></Link>
                             <ul className="menu vertical">

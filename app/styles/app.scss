@@ -110,6 +110,12 @@ table tbody {
   font-family: 'Pathway Gothic One', sans-serif;
 }
 
+.sub-header {
+  color: $crazy-light-grey;
+  font-size: 0.9rem;
+  font-family: 'Pathway Gothic One', sans-serif;
+}
+
 .page-title {
   color: $title-color;
   font-family: 'Pathway Gothic One', sans-serif;
@@ -134,5 +140,12 @@ input[type=search] {
 table.overview-custom {
   thead, tbody, tr, th {
     text-align: center;
+  }
+}
+
+
+table.sensor-details-table {
+  tbody {
+    text-align: left;
   }
 }

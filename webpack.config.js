@@ -47,6 +47,7 @@ module.exports = {
       AccountSettings: 'app/components/AccountSettings.jsx',
       Nav: 'app/components/Nav.jsx',
       AddSensor: 'app/components/AddSensor.jsx',
+      SensorDetails: 'app/components/SensorDetails.jsx',
       PageNotFound: 'app/components/PageNotFound.jsx',
       Main: 'app/components/Main.jsx',
       Weather: 'app/components/Weather.jsx',
