@@ -3,10 +3,14 @@ var axios = require('axios');
 var FontAwesome = require('react-fontawesome');
 var BarChart = require('react-d3-components').BarChart;
 
-var data = [{
+var barChartData = [{
     label: 'Top 5 Processes',
-    values: [{x: '', y: 0}, {x: '', y: 0}, {x: '', y: 0}, {x: '', y: 0}]
+    values: [{x: 'x', y: 0}, {x: 'x', y: 0}, {x: 'x', y: 0}, {x: 'x', y: 0}, {x: 'x', y: 0}]
 }];
+
+var barToolTip = function(x, y0, y) {
+  return "x: " + x + " y: " + y;
+}
 
 class SensorDetails extends React.Component{
 
@@ -28,16 +32,28 @@ class SensorDetails extends React.Component{
       status: '',
       storage: '',
       temperature: '',
-      uptime_percentage: ''
+      uptime_percentage: '',
+      process1name: '',
+      process1value: '',
+      process2name: '',
+      process2value: '',
+      process3name: '',
+      process3value: '',
+      process4name: '',
+      process4value: '',
+      process5name: '',
+      process5value: '',
     };
   }
 
-  componentWillReceiveProps() {
+  componentDidMount() {
     var baseUrl = 'http://52.74.119.147/PisaSchitt/php-websocket/0-sample-generators/get-sensor-info-sample.php';
     axios.get(baseUrl).then(function(res) {
       var res = res.data;
 
       console.log("sensor data", res);
+      console.log('process! ',res.top_5_processes["1"].process);
+      console.log('usage! ',res.top_5_processes["1"].usage);
 
       this.setState({
         mac_address: res.mac_address,
@@ -57,6 +73,20 @@ class SensorDetails extends React.Component{
         uptime_percentage: res.uptime_percentage
       })
 
+      console.log("ugh", barChartData[0].values[0].x);
+
+      barChartData[0].values[0].x = res.top_5_processes["1"].process;
+      barChartData[0].values[1].x = res.top_5_processes["2"].process;
+      barChartData[0].values[2].x = res.top_5_processes["3"].process;
+      barChartData[0].values[3].x = res.top_5_processes["4"].process;
+      barChartData[0].values[4].x = res.top_5_processes["5"].process;
+
+      barChartData[0].values[0].y = res.top_5_processes["1"].usage;
+      barChartData[0].values[1].y = res.top_5_processes["2"].usage;
+      barChartData[0].values[2].y = res.top_5_processes["3"].usage;
+      barChartData[0].values[3].y = res.top_5_processes["4"].usage;
+      barChartData[0].values[4].y = res.top_5_processes["5"].usage;
+
     }.bind(this));
   }
 
@@ -68,6 +98,7 @@ class SensorDetails extends React.Component{
         <div className="sub-header textAlignCenter" style={{marginTop: '-1rem'}}>{this.state.building_name}</div>
         <div className="sub-header textAlignCenter">{this.state.building_level}</div>
         <div className="sub-header textAlignCenter">{this.state.building_area}</div>
+
         <div className="header textAlignCenter">{this.state.status}</div>
         <div className="sub-header textAlignCenter">Since {this.state.hours}hrs, {this.state.mins}mins ({this.state.last_reboot})</div>
         <table className="sensor-details-table">
@@ -122,6 +153,14 @@ class SensorDetails extends React.Component{
             </tr>
           </tbody>
         </table>
+
+        <BarChart
+        data={barChartData}
+        width={200}
+        height={200}
+        margin={{top: 10, bottom: 50, left: 0, right: 0}}
+        tooltipHtml={barToolTip}
+        />
 
         <button className="button hollow expanded">Pin to watch list</button>
       </div>

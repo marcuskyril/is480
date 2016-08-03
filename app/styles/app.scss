@@ -22,10 +22,18 @@ body, html {
 }
 
 div#offCanvas {
-    width: 250px;
+    width: 350px;
     height: 100%;
     padding: 1.5rem;
     background: $body-color;
+}
+
+.is-open-right {
+  transform: translateX(-350px);
+}
+
+.off-canvas.position-right {
+    right: -350px;
 }
 
 .off-canvas-content {
@@ -75,6 +83,10 @@ table tbody {
   margin-bottom: 2rem;
 }
 
+.margin-bottom-small{
+  margin-bottom: 1rem;
+}
+
 .textAlignCenter {
   text-align:center;
 }
@@ -99,6 +111,19 @@ table tbody {
   h3, p {
     margin-bottom: 2rem;
   }
+}
+
+.icon-btn-text-small {
+  font-weight: bold;
+  font-family: 'Pathway Gothic One', sans-serif;
+  text-transform: uppercase;
+
+}
+
+label {
+  text-transform: capitalize;;
+  // font-family: 'Pathway Gothic One', sans-serif;
+  color: $crazy-light-grey;
 }
 
 .header {
@@ -143,9 +168,17 @@ table.overview-custom {
   }
 }
 
-
 table.sensor-details-table {
   tbody {
     text-align: left;
   }
+}
+
+g text {
+  fill: $crazy-light-grey;
+  stroke: $crazy-light-grey;
+}
+
+polyline {
+  stroke: $crazy-light-grey;
 }

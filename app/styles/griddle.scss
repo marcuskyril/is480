@@ -1,7 +1,8 @@
-
+@import "/app.scss";
 
 .griddle-container{
-  border:1px solid #DDD;
+  // border:1px solid #DDD;
+  border: none !important;
 }
 
 .griddle .top-section{
@@ -73,6 +74,10 @@
   background-color:#EDEDED;
   border:0px;
   color:#222;
+}
+
+.griddle button {
+  color: transparent;
 }
 
 .griddle .griddle-previous, .griddle .griddle-page, .griddle .griddle-next{

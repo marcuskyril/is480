@@ -44,7 +44,7 @@ const tableMetaData =  [
     "order":  6,
     "locked": false,
     "visible": true,
-    "sortable": false,
+    "sortable": true,
     "displayName": "Sensor Status"
   },
   {
@@ -52,7 +52,7 @@ const tableMetaData =  [
     "order":  7,
     "locked": false,
     "visible": true,
-    "sortable": false,
+    "sortable": true,
     "displayName": "Flapping"
   },
   {
@@ -60,7 +60,7 @@ const tableMetaData =  [
     "order":  8,
     "locked": false,
     "visible": true,
-    "sortable": false,
+    "sortable": true,
     "displayName": "Network Router"
   },
   {
@@ -68,7 +68,7 @@ const tableMetaData =  [
     "order":  9,
     "locked": false,
     "visible": true,
-    "sortable": false,
+    "sortable": true,
     "displayName": "Temperature"
   },
   {
@@ -76,7 +76,7 @@ const tableMetaData =  [
     "order":  10,
     "locked": false,
     "visible": true,
-    "sortable": false,
+    "sortable": true,
     "displayName": "CPU Usage"
   },
   {
@@ -84,7 +84,7 @@ const tableMetaData =  [
     "order":  11,
     "locked": false,
     "visible": true,
-    "sortable": false,
+    "sortable": true,
     "displayName": "Total RAM"
   },
   {
@@ -92,7 +92,7 @@ const tableMetaData =  [
     "order":  12,
     "locked": false,
     "visible": true,
-    "sortable": false,
+    "sortable": true,
     "displayName": "RAM Free"
   },
   {
@@ -100,7 +100,7 @@ const tableMetaData =  [
     "order":  13,
     "locked": false,
     "visible": true,
-    "sortable": false,
+    "sortable": true,
     "displayName": "RAM used"
   },
   {
@@ -108,7 +108,7 @@ const tableMetaData =  [
     "order":  14,
     "locked": false,
     "visible": true,
-    "sortable": false,
+    "sortable": true,
     "displayName": "RAM Available"
   },
   {
@@ -116,7 +116,7 @@ const tableMetaData =  [
     "order":  15,
     "locked": false,
     "visible": true,
-    "sortable": false,
+    "sortable": true,
     "displayName": "Total Disk Space"
   },
   {
@@ -124,7 +124,7 @@ const tableMetaData =  [
     "order":  16,
     "locked": false,
     "visible": true,
-    "sortable": false,
+    "sortable": true,
     "displayName": "Disk Space Available"
   },
   {
@@ -132,7 +132,7 @@ const tableMetaData =  [
     "order":  17,
     "locked": false,
     "visible": true,
-    "sortable": false,
+    "sortable": true,
     "displayName": "Disk Space Used"
   }
 ];
@@ -176,7 +176,7 @@ class Tableaux extends React.Component {
 
     return (
       <Griddle results={dataList}
-        settingsIconComponent={<FontAwesome name='cog'inverse={true} className="margin-left-small"/>}
+        settingsIconComponent={<FontAwesome name='cog'inverse={true} size="2x" className="margin-left-small"/>}
         columnMetadata={tableMetaData}
         tableClassName="table"
         showFilter={true}

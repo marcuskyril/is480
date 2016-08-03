@@ -42,8 +42,7 @@ var WeatherForm = React.createClass({
                     </div>
                     <div className="row">
                         <div className="large-3 columns">
-                            <input type="reset" className="button hollow" value="Reset"/>
-                            <input type="submit" className="button hollow margin-left-small" value="Bite me"/>
+                            <input type="submit" className="button hollow expanded" value="Bite me"/>
                         </div>
                     </div>
                 </form>

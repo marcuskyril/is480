@@ -156,6 +156,7 @@
 	__webpack_require__(612);
 	__webpack_require__(614);
 	__webpack_require__(616);
+	__webpack_require__(618);
 
 	ReactDOM.render(React.createElement(
 	  'div',
@@ -13037,10 +13038,14 @@
 	var FontAwesome = __webpack_require__(150);
 	var BarChart = __webpack_require__(159).BarChart;
 
-	var data = [{
+	var barChartData = [{
 	  label: 'Top 5 Processes',
-	  values: [{ x: '', y: 0 }, { x: '', y: 0 }, { x: '', y: 0 }, { x: '', y: 0 }]
+	  values: [{ x: 'x', y: 0 }, { x: 'x', y: 0 }, { x: 'x', y: 0 }, { x: 'x', y: 0 }, { x: 'x', y: 0 }]
 	}];
+
+	var barToolTip = function barToolTip(x, y0, y) {
+	  return "x: " + x + " y: " + y;
+	};
 
 	var SensorDetails = function (_React$Component) {
 	  _inherits(SensorDetails, _React$Component);
@@ -13065,19 +13070,31 @@
 	      status: '',
 	      storage: '',
 	      temperature: '',
-	      uptime_percentage: ''
+	      uptime_percentage: '',
+	      process1name: '',
+	      process1value: '',
+	      process2name: '',
+	      process2value: '',
+	      process3name: '',
+	      process3value: '',
+	      process4name: '',
+	      process4value: '',
+	      process5name: '',
+	      process5value: ''
 	    };
 	    return _this;
 	  }
 
 	  _createClass(SensorDetails, [{
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps() {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
 	      var baseUrl = 'http://52.74.119.147/PisaSchitt/php-websocket/0-sample-generators/get-sensor-info-sample.php';
 	      axios.get(baseUrl).then(function (res) {
 	        var res = res.data;
 
 	        console.log("sensor data", res);
+	        console.log('process! ', res.top_5_processes["1"].process);
+	        console.log('usage! ', res.top_5_processes["1"].usage);
 
 	        this.setState({
 	          mac_address: res.mac_address,
@@ -13096,6 +13113,20 @@
 	          temperature: res.temperature,
 	          uptime_percentage: res.uptime_percentage
 	        });
+
+	        console.log("ugh", barChartData[0].values[0].x);
+
+	        barChartData[0].values[0].x = res.top_5_processes["1"].process;
+	        barChartData[0].values[1].x = res.top_5_processes["2"].process;
+	        barChartData[0].values[2].x = res.top_5_processes["3"].process;
+	        barChartData[0].values[3].x = res.top_5_processes["4"].process;
+	        barChartData[0].values[4].x = res.top_5_processes["5"].process;
+
+	        barChartData[0].values[0].y = res.top_5_processes["1"].usage;
+	        barChartData[0].values[1].y = res.top_5_processes["2"].usage;
+	        barChartData[0].values[2].y = res.top_5_processes["3"].usage;
+	        barChartData[0].values[3].y = res.top_5_processes["4"].usage;
+	        barChartData[0].values[4].y = res.top_5_processes["5"].usage;
 	      }.bind(this));
 	    }
 	  }, {
@@ -13244,6 +13275,13 @@
 	            )
 	          )
 	        ),
+	        React.createElement(BarChart, {
+	          data: barChartData,
+	          width: 200,
+	          height: 200,
+	          margin: { top: 10, bottom: 50, left: 0, right: 0 },
+	          tooltipHtml: barToolTip
+	        }),
 	        React.createElement(
 	          'button',
 	          { className: 'button hollow expanded' },
@@ -13379,9 +13417,9 @@
 	            ),
 	            React.createElement(
 	              'button',
-	              { onClick: this.launchAddSensor },
+	              { onClick: this.launchAddSensor, className: 'icon-btn-text-small margin-bottom-small' },
 	              React.createElement(FontAwesome, { name: 'plus-circle' }),
-	              ' ADD PI'
+	              ' ADD SENSOR'
 	            ),
 	            React.createElement(AddSensor, null),
 	            React.createElement(
@@ -13557,8 +13595,7 @@
 	                    React.createElement(
 	                        "div",
 	                        { className: "large-3 columns" },
-	                        React.createElement("input", { type: "reset", className: "button hollow", value: "Reset" }),
-	                        React.createElement("input", { type: "submit", className: "button hollow margin-left-small", value: "Bite me" })
+	                        React.createElement("input", { type: "submit", className: "button hollow expanded", value: "Bite me" })
 	                    )
 	                )
 	            )
@@ -56297,7 +56334,7 @@
 /* 588 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_LOCAL_MODULE_0__;// Snap.svg 0.4.0
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_LOCAL_MODULE_0__;var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Snap.svg 0.4.0
 	// 
 	// Copyright (c) 2013 – 2015 Adobe Systems Incorporated. All rights reserved.
 	// 
@@ -64888,84 +64925,84 @@
 	  "order": 6,
 	  "locked": false,
 	  "visible": true,
-	  "sortable": false,
+	  "sortable": true,
 	  "displayName": "Sensor Status"
 	}, {
 	  "columnName": "flapping",
 	  "order": 7,
 	  "locked": false,
 	  "visible": true,
-	  "sortable": false,
+	  "sortable": true,
 	  "displayName": "Flapping"
 	}, {
 	  "columnName": "network_router",
 	  "order": 8,
 	  "locked": false,
 	  "visible": true,
-	  "sortable": false,
+	  "sortable": true,
 	  "displayName": "Network Router"
 	}, {
 	  "columnName": "temperature",
 	  "order": 9,
 	  "locked": false,
 	  "visible": true,
-	  "sortable": false,
+	  "sortable": true,
 	  "displayName": "Temperature"
 	}, {
 	  "columnName": "CPU_usage",
 	  "order": 10,
 	  "locked": false,
 	  "visible": true,
-	  "sortable": false,
+	  "sortable": true,
 	  "displayName": "CPU Usage"
 	}, {
 	  "columnName": "RAM_total",
 	  "order": 11,
 	  "locked": false,
 	  "visible": true,
-	  "sortable": false,
+	  "sortable": true,
 	  "displayName": "Total RAM"
 	}, {
 	  "columnName": "RAM_free",
 	  "order": 12,
 	  "locked": false,
 	  "visible": true,
-	  "sortable": false,
+	  "sortable": true,
 	  "displayName": "RAM Free"
 	}, {
 	  "columnName": "RAM_used",
 	  "order": 13,
 	  "locked": false,
 	  "visible": true,
-	  "sortable": false,
+	  "sortable": true,
 	  "displayName": "RAM used"
 	}, {
 	  "columnName": "RAM_available",
 	  "order": 14,
 	  "locked": false,
 	  "visible": true,
-	  "sortable": false,
+	  "sortable": true,
 	  "displayName": "RAM Available"
 	}, {
 	  "columnName": "disk_space_total",
 	  "order": 15,
 	  "locked": false,
 	  "visible": true,
-	  "sortable": false,
+	  "sortable": true,
 	  "displayName": "Total Disk Space"
 	}, {
 	  "columnName": "disk_space_free",
 	  "order": 16,
 	  "locked": false,
 	  "visible": true,
-	  "sortable": false,
+	  "sortable": true,
 	  "displayName": "Disk Space Available"
 	}, {
 	  "columnName": "disk_space_used",
 	  "order": 17,
 	  "locked": false,
 	  "visible": true,
-	  "sortable": false,
+	  "sortable": true,
 	  "displayName": "Disk Space Used"
 	}];
 
@@ -65014,7 +65051,7 @@
 	    value: function render() {
 
 	      return React.createElement(Griddle, { results: dataList,
-	        settingsIconComponent: React.createElement(FontAwesome, { name: 'cog', inverse: true, className: 'margin-left-small' }),
+	        settingsIconComponent: React.createElement(FontAwesome, { name: 'cog', inverse: true, size: '2x', className: 'margin-left-small' }),
 	        columnMetadata: tableMetaData,
 	        tableClassName: 'table',
 	        showFilter: true,
@@ -66340,7 +66377,7 @@
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Pathway+Gothic+One);", ""]);
 
 	// module
-	exports.push([module.id, "body, html {\n  background: #1a1b1b;\n  height: 100%;\n  font-family: roboto;\n  color: #fafafa; }\n\n.row {\n  max-width: 85rem; }\n\ndiv#offCanvas {\n  width: 250px;\n  height: 100%;\n  padding: 1.5rem;\n  background: #1a1b1b; }\n\n.off-canvas-content {\n  background: #1a1b1b; }\n\na {\n  color: #6abedb; }\n\nhr {\n  border-color: #373837;\n  margin-top: 0.5rem; }\n\ntable thead {\n  background: #323232;\n  color: white; }\n\ntable tbody {\n  background: #e6e7e8;\n  color: #1a1b1b; }\n\n.margin-top-large {\n  margin-top: 4rem; }\n\n.margin-bottom-large {\n  margin-bottom: 4rem; }\n\n.margin-right-small {\n  margin-right: 2rem; }\n\n.margin-left-small {\n  margin-left: 2rem; }\n\n.margin-top-md {\n  margin-top: 2rem; }\n\n.margin-bottom-md {\n  margin-bottom: 2rem; }\n\n.textAlignCenter {\n  text-align: center; }\n\n.callout {\n  background-color: #e6e7e8; }\n\n.callout-dark {\n  padding: 1.5rem;\n  background-color: #323232;\n  border: 1px solid #373837;\n  border-radius: 4px; }\n\n.callout-auth {\n  background-color: #fafafa;\n  border: 1px solid #fafafa;\n  padding: 2rem;\n  text-align: center; }\n  .callout-auth h3, .callout-auth p {\n    margin-bottom: 2rem; }\n\n.header {\n  color: #6abedb;\n  margin-top: 1.5rem;\n  font-size: 1.5rem;\n  text-transform: uppercase;\n  font-weight: bold;\n  font-family: 'Pathway Gothic One', sans-serif; }\n\n.sub-header {\n  color: #e6e7e8;\n  font-size: 0.9rem;\n  font-family: 'Pathway Gothic One', sans-serif; }\n\n.page-title {\n  color: #555;\n  font-family: 'Pathway Gothic One', sans-serif;\n  font-size: 1.5rem;\n  margin-top: 1.5rem;\n  margin-bottom: 1.5rem; }\n\ninput[type=search] {\n  box-shadow: none; }\n\n.top-bar-upper {\n  color: #333;\n  font-size: 0.5rem; }\n\n.app-header {\n  font-size: 1.3rem; }\n\ntable.overview-custom thead, table.overview-custom tbody, table.overview-custom tr, table.overview-custom th {\n  text-align: center; }\n\ntable.sensor-details-table tbody {\n  text-align: left; }\n", ""]);
+	exports.push([module.id, "body, html {\n  background: #1a1b1b;\n  height: 100%;\n  font-family: roboto;\n  color: #fafafa; }\n\n.row {\n  max-width: 85rem; }\n\ndiv#offCanvas {\n  width: 350px;\n  height: 100%;\n  padding: 1.5rem;\n  background: #1a1b1b; }\n\n.is-open-right {\n  transform: translateX(-350px); }\n\n.off-canvas.position-right {\n  right: -350px; }\n\n.off-canvas-content {\n  background: #1a1b1b; }\n\na {\n  color: #6abedb; }\n\nhr {\n  border-color: #373837;\n  margin-top: 0.5rem; }\n\ntable thead {\n  background: #323232;\n  color: white; }\n\ntable tbody {\n  background: #e6e7e8;\n  color: #1a1b1b; }\n\n.margin-top-large {\n  margin-top: 4rem; }\n\n.margin-bottom-large {\n  margin-bottom: 4rem; }\n\n.margin-right-small {\n  margin-right: 2rem; }\n\n.margin-left-small {\n  margin-left: 2rem; }\n\n.margin-top-md {\n  margin-top: 2rem; }\n\n.margin-bottom-md {\n  margin-bottom: 2rem; }\n\n.margin-bottom-small {\n  margin-bottom: 1rem; }\n\n.textAlignCenter {\n  text-align: center; }\n\n.callout {\n  background-color: #e6e7e8; }\n\n.callout-dark {\n  padding: 1.5rem;\n  background-color: #323232;\n  border: 1px solid #373837;\n  border-radius: 4px; }\n\n.callout-auth {\n  background-color: #fafafa;\n  border: 1px solid #fafafa;\n  padding: 2rem;\n  text-align: center; }\n  .callout-auth h3, .callout-auth p {\n    margin-bottom: 2rem; }\n\n.icon-btn-text-small {\n  font-weight: bold;\n  font-family: 'Pathway Gothic One', sans-serif;\n  text-transform: uppercase; }\n\nlabel {\n  text-transform: capitalize;\n  color: #e6e7e8; }\n\n.header {\n  color: #6abedb;\n  margin-top: 1.5rem;\n  font-size: 1.5rem;\n  text-transform: uppercase;\n  font-weight: bold;\n  font-family: 'Pathway Gothic One', sans-serif; }\n\n.sub-header {\n  color: #e6e7e8;\n  font-size: 0.9rem;\n  font-family: 'Pathway Gothic One', sans-serif; }\n\n.page-title {\n  color: #555;\n  font-family: 'Pathway Gothic One', sans-serif;\n  font-size: 1.5rem;\n  margin-top: 1.5rem;\n  margin-bottom: 1.5rem; }\n\ninput[type=search] {\n  box-shadow: none; }\n\n.top-bar-upper {\n  color: #333;\n  font-size: 0.5rem; }\n\n.app-header {\n  font-size: 1.3rem; }\n\ntable.overview-custom thead, table.overview-custom tbody, table.overview-custom tr, table.overview-custom th {\n  text-align: center; }\n\ntable.sensor-details-table tbody {\n  text-align: left; }\n\ng text {\n  fill: #e6e7e8;\n  stroke: #e6e7e8; }\n\npolyline {\n  stroke: #e6e7e8; }\n", ""]);
 
 	// exports
 
@@ -66381,7 +66418,7 @@
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Pathway+Gothic+One);", ""]);
 
 	// module
-	exports.push([module.id, "body, html {\n  background: #1a1b1b;\n  height: 100%;\n  font-family: roboto;\n  color: #fafafa; }\n\n.row {\n  max-width: 85rem; }\n\ndiv#offCanvas {\n  width: 250px;\n  height: 100%;\n  padding: 1.5rem;\n  background: #1a1b1b; }\n\n.off-canvas-content {\n  background: #1a1b1b; }\n\na {\n  color: #6abedb; }\n\nhr {\n  border-color: #373837;\n  margin-top: 0.5rem; }\n\ntable thead {\n  background: #323232;\n  color: white; }\n\ntable tbody {\n  background: #e6e7e8;\n  color: #1a1b1b; }\n\n.margin-top-large {\n  margin-top: 4rem; }\n\n.margin-bottom-large {\n  margin-bottom: 4rem; }\n\n.margin-right-small {\n  margin-right: 2rem; }\n\n.margin-left-small {\n  margin-left: 2rem; }\n\n.margin-top-md {\n  margin-top: 2rem; }\n\n.margin-bottom-md {\n  margin-bottom: 2rem; }\n\n.textAlignCenter {\n  text-align: center; }\n\n.callout {\n  background-color: #e6e7e8; }\n\n.callout-dark {\n  padding: 1.5rem;\n  background-color: #323232;\n  border: 1px solid #373837;\n  border-radius: 4px; }\n\n.callout-auth {\n  background-color: #fafafa;\n  border: 1px solid #fafafa;\n  padding: 2rem;\n  text-align: center; }\n  .callout-auth h3, .callout-auth p {\n    margin-bottom: 2rem; }\n\n.header {\n  color: #6abedb;\n  margin-top: 1.5rem;\n  font-size: 1.5rem;\n  text-transform: uppercase;\n  font-weight: bold;\n  font-family: 'Pathway Gothic One', sans-serif; }\n\n.sub-header {\n  color: #e6e7e8;\n  font-size: 0.9rem;\n  font-family: 'Pathway Gothic One', sans-serif; }\n\n.page-title {\n  color: #555;\n  font-family: 'Pathway Gothic One', sans-serif;\n  font-size: 1.5rem;\n  margin-top: 1.5rem;\n  margin-bottom: 1.5rem; }\n\ninput[type=search] {\n  box-shadow: none; }\n\n.top-bar-upper {\n  color: #333;\n  font-size: 0.5rem; }\n\n.app-header {\n  font-size: 1.3rem; }\n\ntable.overview-custom thead, table.overview-custom tbody, table.overview-custom tr, table.overview-custom th {\n  text-align: center; }\n\ntable.sensor-details-table tbody {\n  text-align: left; }\n\n.top-bar-left {\n  margin-top: 1.5rem; }\n\n.top-bar-right {\n  margin-top: 1.5rem; }\n\n.top-bar {\n  padding: 0rem 2rem 0rem 2rem;\n  background: #323232;\n  height: 4rem;\n  box-shadow: 0.5px 0.5px 5px #373837; }\n\n.top-bar ul {\n  background: #323232; }\n\n.top-bar.lower {\n  padding-top: 0px; }\n\n.top-bar-title {\n  margin-top: 1rem;\n  font-size: 1.7rem;\n  text-transform: uppercase;\n  font-weight: bold;\n  font-family: 'Pathway Gothic One', sans-serif; }\n\n.menu > li > a {\n  color: #fafafa;\n  font-weight: bold;\n  font-size: 1rem;\n  text-transform: uppercase; }\n\n.is-dropdown-submenu {\n  border: 1px solid #373737; }\n", ""]);
+	exports.push([module.id, "body, html {\n  background: #1a1b1b;\n  height: 100%;\n  font-family: roboto;\n  color: #fafafa; }\n\n.row {\n  max-width: 85rem; }\n\ndiv#offCanvas {\n  width: 350px;\n  height: 100%;\n  padding: 1.5rem;\n  background: #1a1b1b; }\n\n.is-open-right {\n  transform: translateX(-350px); }\n\n.off-canvas.position-right {\n  right: -350px; }\n\n.off-canvas-content {\n  background: #1a1b1b; }\n\na {\n  color: #6abedb; }\n\nhr {\n  border-color: #373837;\n  margin-top: 0.5rem; }\n\ntable thead {\n  background: #323232;\n  color: white; }\n\ntable tbody {\n  background: #e6e7e8;\n  color: #1a1b1b; }\n\n.margin-top-large {\n  margin-top: 4rem; }\n\n.margin-bottom-large {\n  margin-bottom: 4rem; }\n\n.margin-right-small {\n  margin-right: 2rem; }\n\n.margin-left-small {\n  margin-left: 2rem; }\n\n.margin-top-md {\n  margin-top: 2rem; }\n\n.margin-bottom-md {\n  margin-bottom: 2rem; }\n\n.margin-bottom-small {\n  margin-bottom: 1rem; }\n\n.textAlignCenter {\n  text-align: center; }\n\n.callout {\n  background-color: #e6e7e8; }\n\n.callout-dark {\n  padding: 1.5rem;\n  background-color: #323232;\n  border: 1px solid #373837;\n  border-radius: 4px; }\n\n.callout-auth {\n  background-color: #fafafa;\n  border: 1px solid #fafafa;\n  padding: 2rem;\n  text-align: center; }\n  .callout-auth h3, .callout-auth p {\n    margin-bottom: 2rem; }\n\n.icon-btn-text-small {\n  font-weight: bold;\n  font-family: 'Pathway Gothic One', sans-serif;\n  text-transform: uppercase; }\n\nlabel {\n  text-transform: capitalize;\n  color: #e6e7e8; }\n\n.header {\n  color: #6abedb;\n  margin-top: 1.5rem;\n  font-size: 1.5rem;\n  text-transform: uppercase;\n  font-weight: bold;\n  font-family: 'Pathway Gothic One', sans-serif; }\n\n.sub-header {\n  color: #e6e7e8;\n  font-size: 0.9rem;\n  font-family: 'Pathway Gothic One', sans-serif; }\n\n.page-title {\n  color: #555;\n  font-family: 'Pathway Gothic One', sans-serif;\n  font-size: 1.5rem;\n  margin-top: 1.5rem;\n  margin-bottom: 1.5rem; }\n\ninput[type=search] {\n  box-shadow: none; }\n\n.top-bar-upper {\n  color: #333;\n  font-size: 0.5rem; }\n\n.app-header {\n  font-size: 1.3rem; }\n\ntable.overview-custom thead, table.overview-custom tbody, table.overview-custom tr, table.overview-custom th {\n  text-align: center; }\n\ntable.sensor-details-table tbody {\n  text-align: left; }\n\ng text {\n  fill: #e6e7e8;\n  stroke: #e6e7e8; }\n\npolyline {\n  stroke: #e6e7e8; }\n\n.top-bar-left {\n  margin-top: 1.5rem; }\n\n.top-bar-right {\n  margin-top: 1.5rem; }\n\n.top-bar {\n  padding: 0rem 2rem 0rem 2rem;\n  background: #323232;\n  height: 4rem;\n  box-shadow: 0.5px 0.5px 5px #373837; }\n\n.top-bar ul {\n  background: #323232; }\n\n.top-bar.lower {\n  padding-top: 0px; }\n\n.top-bar-title {\n  margin-top: 1rem;\n  font-size: 1.7rem;\n  text-transform: uppercase;\n  font-weight: bold;\n  font-family: 'Pathway Gothic One', sans-serif; }\n\n.menu > li > a {\n  color: #fafafa;\n  font-weight: bold;\n  font-size: 1rem;\n  text-transform: uppercase; }\n\n.is-dropdown-submenu {\n  border: 1px solid #373737; }\n", ""]);
 
 	// exports
 
@@ -66462,6 +66499,47 @@
 
 	// module
 	exports.push([module.id, ".login-wrapper {\n  text-align: center;\n  transform: translateY(50%); }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 618 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(619);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(609)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./griddle.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./griddle.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 619 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(608)();
+	// imports
+	exports.push([module.id, "@import url(http://fonts.googleapis.com/css?family=Roboto:300,400);", ""]);
+	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Pathway+Gothic+One);", ""]);
+
+	// module
+	exports.push([module.id, "body, html {\n  background: #1a1b1b;\n  height: 100%;\n  font-family: roboto;\n  color: #fafafa; }\n\n.row {\n  max-width: 85rem; }\n\ndiv#offCanvas {\n  width: 350px;\n  height: 100%;\n  padding: 1.5rem;\n  background: #1a1b1b; }\n\n.is-open-right {\n  transform: translateX(-350px); }\n\n.off-canvas.position-right {\n  right: -350px; }\n\n.off-canvas-content {\n  background: #1a1b1b; }\n\na {\n  color: #6abedb; }\n\nhr {\n  border-color: #373837;\n  margin-top: 0.5rem; }\n\ntable thead {\n  background: #323232;\n  color: white; }\n\ntable tbody {\n  background: #e6e7e8;\n  color: #1a1b1b; }\n\n.margin-top-large {\n  margin-top: 4rem; }\n\n.margin-bottom-large {\n  margin-bottom: 4rem; }\n\n.margin-right-small {\n  margin-right: 2rem; }\n\n.margin-left-small {\n  margin-left: 2rem; }\n\n.margin-top-md {\n  margin-top: 2rem; }\n\n.margin-bottom-md {\n  margin-bottom: 2rem; }\n\n.margin-bottom-small {\n  margin-bottom: 1rem; }\n\n.textAlignCenter {\n  text-align: center; }\n\n.callout {\n  background-color: #e6e7e8; }\n\n.callout-dark {\n  padding: 1.5rem;\n  background-color: #323232;\n  border: 1px solid #373837;\n  border-radius: 4px; }\n\n.callout-auth {\n  background-color: #fafafa;\n  border: 1px solid #fafafa;\n  padding: 2rem;\n  text-align: center; }\n  .callout-auth h3, .callout-auth p {\n    margin-bottom: 2rem; }\n\n.icon-btn-text-small {\n  font-weight: bold;\n  font-family: 'Pathway Gothic One', sans-serif;\n  text-transform: uppercase; }\n\nlabel {\n  text-transform: capitalize;\n  color: #e6e7e8; }\n\n.header {\n  color: #6abedb;\n  margin-top: 1.5rem;\n  font-size: 1.5rem;\n  text-transform: uppercase;\n  font-weight: bold;\n  font-family: 'Pathway Gothic One', sans-serif; }\n\n.sub-header {\n  color: #e6e7e8;\n  font-size: 0.9rem;\n  font-family: 'Pathway Gothic One', sans-serif; }\n\n.page-title {\n  color: #555;\n  font-family: 'Pathway Gothic One', sans-serif;\n  font-size: 1.5rem;\n  margin-top: 1.5rem;\n  margin-bottom: 1.5rem; }\n\ninput[type=search] {\n  box-shadow: none; }\n\n.top-bar-upper {\n  color: #333;\n  font-size: 0.5rem; }\n\n.app-header {\n  font-size: 1.3rem; }\n\ntable.overview-custom thead, table.overview-custom tbody, table.overview-custom tr, table.overview-custom th {\n  text-align: center; }\n\ntable.sensor-details-table tbody {\n  text-align: left; }\n\ng text {\n  fill: #e6e7e8;\n  stroke: #e6e7e8; }\n\npolyline {\n  stroke: #e6e7e8; }\n\n.griddle-container {\n  border: none !important; }\n\n.griddle .top-section {\n  clear: both;\n  display: table;\n  width: 100%; }\n\n.griddle .griddle-filter {\n  float: left;\n  width: 50%;\n  text-align: left;\n  color: #222;\n  min-height: 1px; }\n\n.griddle .griddle-settings-toggle {\n  float: left;\n  width: 50%;\n  text-align: right;\n  color: #f8f8f8; }\n\n.griddle .griddle-settings {\n  background-color: #FFF;\n  border: 1px solid #DDD;\n  color: #222;\n  padding: 10px;\n  margin-bottom: 10px; }\n\n.griddle .griddle-settings .settings {\n  color: #f8f8f8; }\n\n.griddle .griddle-settings .griddle-columns {\n  clear: both;\n  display: table;\n  width: 100%;\n  border-bottom: 1px solid #EDEDED;\n  margin-bottom: 10px; }\n\n.griddle .griddle-settings .griddle-column-selection {\n  float: left;\n  width: 20%; }\n\n.griddle table {\n  width: 100%;\n  table-layout: fixed; }\n\n.griddle th {\n  background-color: #EDEDEF;\n  border: 0px;\n  border-bottom: 1px solid #DDD;\n  color: #222;\n  padding: 5px; }\n\n.griddle td {\n  padding: 5px;\n  background-color: #FFF;\n  border-top-color: #DDD;\n  color: #222; }\n\n.griddle .footer-container {\n  padding: 0px;\n  background-color: #EDEDED;\n  border: 0px;\n  color: #222; }\n\n.griddle button {\n  color: transparent; }\n\n.griddle .griddle-previous, .griddle .griddle-page, .griddle .griddle-next {\n  float: left;\n  width: 33%;\n  min-height: 1px;\n  margin-top: 5px; }\n\n.griddle .griddle-page {\n  text-align: center; }\n\n.griddle .griddle-next {\n  text-align: right; }\n", ""]);
 
 	// exports
 

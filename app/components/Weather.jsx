@@ -90,8 +90,8 @@ var Weather = React.createClass({
 
                     <div>
                       <h4 className="header">Pi Health Overview</h4>
-                      <button onClick={this.launchAddSensor}>
-                        <FontAwesome name='plus-circle'/> ADD PI
+                      <button onClick={this.launchAddSensor} className="icon-btn-text-small margin-bottom-small">
+                        <FontAwesome name='plus-circle'/> ADD SENSOR
                       </button>
                       <AddSensor/>
                       <div className="callout callout-dark">
