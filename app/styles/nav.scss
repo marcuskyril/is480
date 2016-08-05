@@ -10,13 +10,17 @@
 
 .top-bar {
   padding: 0rem 2rem 0rem 2rem;
-  background: $dark-grey;
+  background: $night-ocean;
   height: 4rem;
   box-shadow: 0.5px 0.5px 5px $light-grey;
 }
 
 .top-bar ul {
-  background: $dark-grey;
+  background: $night-ocean;
+  /* temporary fix */
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 
 .top-bar.lower {
@@ -24,11 +28,13 @@
 }
 
 .top-bar-title {
-  margin-top: 1rem;
   font-size: 1.7rem;
   text-transform: uppercase;
   font-weight: bold;
   font-family: 'Pathway Gothic One', sans-serif;
+  position: absolute;
+  top: 15px;
+  left: 15px;
 }
 
 .menu>li>a {

@@ -148,7 +148,7 @@ class Tableaux extends React.Component {
   }
 
   componentDidMount() {
-    var baseUrl = 'http://52.74.119.147/PisaSchitt/php-websocket/0-sample-generators/sensor-data-generator.php?number=';
+    var baseUrl = 'http://52.74.119.147/PisaSchitt/websocket-functions/0-sample-generators/sensor-data-generator.php?number=';
     var url = baseUrl + 30;
     axios.get(url).then(function(res) {
 
@@ -176,7 +176,7 @@ class Tableaux extends React.Component {
 
     return (
       <Griddle results={dataList}
-        settingsIconComponent={<FontAwesome name='cog'inverse={true} size="2x" className="margin-left-small"/>}
+        settingsIconComponent={<FontAwesome name='cog' style={{color: '#232f32'}} size="2x" className="margin-left-small"/>}
         columnMetadata={tableMetaData}
         tableClassName="table"
         showFilter={true}

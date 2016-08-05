@@ -47,7 +47,7 @@ class SensorDetails extends React.Component{
   }
 
   componentDidMount() {
-    var baseUrl = 'http://52.74.119.147/PisaSchitt/php-websocket/0-sample-generators/get-sensor-info-sample.php';
+    var baseUrl = 'http://52.74.119.147/PisaSchitt/websocket-functions/0-sample-generators/get-sensor-info-sample.php';
     axios.get(baseUrl).then(function(res) {
       var res = res.data;
 
@@ -101,7 +101,7 @@ class SensorDetails extends React.Component{
 
         <div className="header textAlignCenter">{this.state.status}</div>
         <div className="sub-header textAlignCenter">Since {this.state.hours}hrs, {this.state.mins}mins ({this.state.last_reboot})</div>
-        <table className="sensor-details-table">
+        <table className="sensor-details-table margin-top-md">
           <tbody>
             <tr>
               <td>
@@ -156,12 +156,13 @@ class SensorDetails extends React.Component{
 
         <BarChart
         data={barChartData}
-        width={200}
-        height={200}
-        margin={{top: 10, bottom: 50, left: 0, right: 0}}
+        width={290}
+        height={375}
+        margin={{top: 50, bottom: 50, left: 45, right: 0}}
         tooltipHtml={barToolTip}
         />
 
+      <button className="button hollow expanded disabled">Reboot</button>
         <button className="button hollow expanded">Pin to watch list</button>
       </div>
     );

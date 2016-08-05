@@ -1,14 +1,33 @@
 var React = require('react');
 var Nav = require('Nav');
 var SensorDetails = require('SensorDetails');
+var Dashboard = require('Dashboard');
 
 class Main extends React.Component {
+
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        BuildingOverview: []
+      }
+    }
 
     componentDidMount() {
         $(document).foundation();
 
-        console.log("this.props.macAdd", this.props);
+        var conn = new ab.Session('ws://52.74.119.147:9000', function() {
+            conn.subscribe('', function(topic, data) {
+                console.log(data);
+
+
+
+            });
+        }, function() {
+            console.warn('WebSocket connection closed');
+        }, {'skipSubprotocolCheck': true});
     }
+
     render() {
         return (
             <div>
@@ -20,8 +39,10 @@ class Main extends React.Component {
 
                         <div className="off-canvas-content" data-off-canvas-content>
                             <Nav/>
+
                             <div className="row">
-                                <div className="columns medium-12 large 8">
+                                <div className="columns medium-12 large 12">
+                                    
                                     {this.props.children}
                                 </div>
                             </div>

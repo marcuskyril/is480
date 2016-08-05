@@ -81,7 +81,7 @@ class GeneralMetrics extends React.Component{
     componentDidMount() {
         $(document).foundation();
 
-        var baseUrl = 'http://52.74.119.147/PisaSchitt/php-websocket/0-sample-generators/regionmall-sample.php?number=';
+        var baseUrl = 'http://52.74.119.147/PisaSchitt/websocket-functions/0-sample-generators/regionmall-sample.php?number=';
         var numRows = 30;
         axios.get(baseUrl+numRows).then(function(res) {
 
@@ -101,6 +101,7 @@ class GeneralMetrics extends React.Component{
             <div>
                 <Griddle
                   results={dataList}
+                  showFilter={true}
                   initialSort="building_name"
                   tableClassName="piOverviewTable"
                   columnMetadata={tableMetaData}/>
@@ -110,45 +111,3 @@ class GeneralMetrics extends React.Component{
 }
 
 module.exports = GeneralMetrics;
-
-
-
-// <ul className="tabs" data-tabs id="example-tabs">
-//     <li className="tabs-title is-active">
-//         <a href="#panel1" aria-selected="true">Central</a>
-//     </li>
-//     <li className="tabs-title">
-//         <a href="#panel2">North</a>
-//     </li>
-//     <li className="tabs-title">
-//         <a href="#panel3">South</a>
-//     </li>
-//     <li className="tabs-title">
-//         <a href="#panel4">East</a>
-//     </li>
-//     <li className="tabs-title">
-//         <a href="#panel5">West</a>
-//     </li>
-// </ul>
-//
-// <div className="tabs-content" data-tabs-content="example-tabs">
-//     <div className="tabs-panel is-active" id="panel1">
-//         <strong>Orchard Central</strong>
-//         <SensorStatus/>
-//
-//         <strong>313@Somerset</strong>
-//         <SensorStatus/>
-//     </div>
-//     <div className="tabs-panel" id="panel2">
-//         <p>Suspendisse dictum feugiat nisl ut dapibus. Vivamus hendrerit arcu sed erat molestie vehicula. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
-//     </div>
-//     <div className="tabs-panel" id="panel3">
-//         <p>Suspendisse dictum feugiat nisl ut dapibus. Vivamus hendrerit arcu sed erat molestie vehicula. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
-//     </div>
-//     <div className="tabs-panel" id="panel4">
-//         <p>Suspendisse dictum feugiat nisl ut dapibus. Vivamus hendrerit arcu sed erat molestie vehicula. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
-//     </div>
-//     <div className="tabs-panel" id="panel5">
-//         <p>Suspendisse dictum feugiat nisl ut dapibus. Vivamus hendrerit arcu sed erat molestie vehicula. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
-//     </div>
-// </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, Router, IndexRoute, hashHistory} from 'react-router';
 var Main = require('Main');
-var Weather = require('Weather');
+var Dashboard = require('Dashboard');
 var About = require('About');
 var Examples = require('Examples');
 var AccountSettings = require('AccountSettings');
@@ -34,7 +34,7 @@ export default(
           <Route path="/about" component={About} onEnter={requireLogin}/>
           <Route path="/examples" component={Examples} onEnter={requireLogin}/>
           <Route path="/accountSettings" component={AccountSettings} onEnter={requireLogin}/>
-          <IndexRoute component={Weather}/>
+          <IndexRoute component={Dashboard}/>
       </Route>
       <Route path="/" component={Login} onEnter={redirectIfLoggedIn}/>
     </Router>

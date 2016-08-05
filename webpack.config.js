@@ -45,12 +45,14 @@ module.exports = {
     alias: {
       app: 'app',
       AccountSettings: 'app/components/AccountSettings.jsx',
+      Building: 'app/components/Building.jsx',
+      BuildingOverview: 'app/components/BuildingOverview.jsx',
       Nav: 'app/components/Nav.jsx',
       AddSensor: 'app/components/AddSensor.jsx',
       SensorDetails: 'app/components/SensorDetails.jsx',
       PageNotFound: 'app/components/PageNotFound.jsx',
       Main: 'app/components/Main.jsx',
-      Weather: 'app/components/Weather.jsx',
+      Dashboard: 'app/components/Dashboard.jsx',
       WeatherForm: 'app/components/WeatherForm.jsx',
       WeatherMessage: 'app/components/WeatherMessage.jsx',
       About: 'app/components/About.jsx',
@@ -75,7 +77,6 @@ module.exports = {
       loginStyles: 'app/styles/login.scss',
       Tableaux: 'app/components/Tableaux.jsx',
       Notifications: 'app/components/Notifications.jsx',
-      WebsocketHandler: 'app/components/WebsocketHandler.jsx',
       DataStore: 'app/components/DataStore.js'
     },
     extensions: ['', '.js', '.jsx']

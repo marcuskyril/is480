@@ -1,5 +1,4 @@
 var React = require('react');
-import {websocketInit, websocketSend} from 'WebsocketHandler';
 var PieChart = require('react-d3-components').PieChart;
 var Griddle = require('griddle-react');
 
@@ -10,16 +9,16 @@ var chartData = {
     values: [
         {
             x: 'OK',
-            y: 10
+            y: 1
         }, {
             x: 'Warning',
-            y: 9
+            y: 1
         }, {
             x: 'Danger',
-            y: 8
+            y: 1
         }, {
             x: 'Down',
-            y: 7
+            y: 1
         }
     ],
     color: [
@@ -39,10 +38,6 @@ var connection = null;
 var SensorHealthOverview = React.createClass({
     getInitialState: function() {
         return {ok: 0, warning: 0, danger: 0, down: 0}
-    },
-
-    componentDidMount: function() {
-        connection = websocketInit();
     },
 
     componentWillReceiveProps: function() {
